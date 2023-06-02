@@ -88,6 +88,20 @@ after eval
 
 This is basically just a wraper around [confd](https://github.com/kelseyhightower/confd) with some shell redirection to hang this on an entrypoint of a docker container. This allows for config and secrets to be loaded synamically inside of a container from any backend supported by confd.
 
+This util needs to be kept light in terms of runtime since we don't want to starve the application of CPU usage or memory.
+
+```
+Mem: 8182292K used, 7982016K free, 712888K shrd, 439800K buff, 4087056K cached
+CPU:   1% usr   0% sys   0% nic  98% idle   0% io   0% irq   0% sirq
+Load average: 0.38 0.24 0.26 2/1709 137
+  PID  PPID USER     STAT   VSZ %VSZ CPU %CPU COMMAND
+    8     1 root     S     686m   4%   4   0% confg-discog
+   80     0 root     S     1596   0%   2   0% sh
+    1     0 root     S     1588   0%   7   0% {entrypoint} /bin/sh /usr/bin/entrypoint /usr/bin/cmd
+    9     1 root     S     1588   0%   1   0% {cmd} /bin/sh /usr/bin/cmd
+  108    80 root     R     1528   0%   4   0% top
+```
+
 ## TODO
 
 - Figure out how we can debug this when running in a docker container on a orchestrator ECS or K8. This will involve where to send logs or prehaps having an SNS topic that can tell us when we are getting errors from the runs of confd.
