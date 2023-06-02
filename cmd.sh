@@ -1,7 +1,7 @@
 #!/bin/sh
-
-function app {
-  sleep 1000
-}
-
-app
+echo hello
+sleep 100 
+source /tmp/myconfig.conf
+echo ${DATABASE_URL} 
+echo ${DATABASE_USER}
+echo bye
