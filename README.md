@@ -29,23 +29,23 @@ function confg_discog_build_and_run {
 $ confg_discog_build_and_run 
 ```
 
-You should recieve an output something like the below:
+You should recieve an output something like the below, if you change your ssm parameter between the second sleep in cmd.sh; the key thing to notice in this output is the 
 
 ```
-Successfully built 63d0838c0807
-Successfully tagged confg_discog:latest
 test
 after
 hello
-2023/06/02 16:07:14 Starting confg-discog
-2023/06/02 16:07:14 loglevel set to info
-2023-06-02T16:07:15Z 6a18320fe800 confd[14]: INFO Backend set to ssm
-2023-06-02T16:07:15Z 6a18320fe800 confd[14]: INFO Starting confd
-2023-06-02T16:07:15Z 6a18320fe800 confd[14]: INFO Backend source(s) set to 
-2023-06-02T16:07:15Z 6a18320fe800 confd[14]: INFO Target config /tmp/myconfig.conf out of sync
-2023-06-02T16:07:15Z 6a18320fe800 confd[14]: INFO Target config /tmp/myconfig.conf has been updated
+2023/06/02 16:24:39 Starting confg-discog
+2023/06/02 16:24:39 loglevel set to info
+2023-06-02T16:24:39Z e6ac152e9e56 confd[13]: INFO Backend set to ssm
+2023-06-02T16:24:39Z e6ac152e9e56 confd[13]: INFO Starting confd
+2023-06-02T16:24:39Z e6ac152e9e56 confd[13]: INFO Backend source(s) set to 
+2023-06-02T16:24:39Z e6ac152e9e56 confd[13]: INFO Target config /tmp/myconfig.conf out of sync
+2023-06-02T16:24:39Z e6ac152e9e56 confd[13]: INFO Target config /tmp/myconfig.conf has been updated
 db.example.com
-rob
+hello
+db.example.com
+hello
 bye
 after eval
 ```
