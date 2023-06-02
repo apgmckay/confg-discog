@@ -44,6 +44,7 @@ func (cd *ConfgDiscog) Run() {
 
 func (cd *ConfgDiscog) runConfdOnetime() error {
 	confidCommand := []string{"confd", "-onetime", "-backend", cd.backend, "-log-level", cd.logLevel}
+	log.Printf("starting command: %v", confidCommand)
 	err := runCommand(confidCommand[0], confidCommand[1:])
 	if err != nil {
 		return err

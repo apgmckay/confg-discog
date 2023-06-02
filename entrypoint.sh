@@ -1,7 +1,7 @@
 #!/bin/sh
 
-echo "test"
+echo "entrypoint: starting"
 confg-discog &
-echo "after"
+echo "entrypoint: config-discog started"
 eval "${@}"
-echo "after eval"
+echo "entrypoint: after eval"
