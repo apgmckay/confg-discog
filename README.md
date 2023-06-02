@@ -15,9 +15,12 @@ $$ |  $$\ $$ |  $$ |$$ |  $$ |$$ |     $$ |  $$ |        $$ |  $$ |$$ | \____$$\
                                        \$$$$$$  |                                                    \$$$$$$  |
                                         \______/                                                      \______/
 ```
+
+Based on [confd](https://github.com/kelseyhightower/confd).
+
 ## Config
 
-To config confd to try this out you will need to run the terraform code in the [_terraform](_terraform) directory.
+To try this out you will need to run the terraform code in the [_terraform](_terraform) directory.
 
 This can be done with a basic terraform init, plan and apply.
 
@@ -38,7 +41,7 @@ function confg_discog_build_and_run {
 $ confg_discog_build_and_run 
 ```
 
-You should recieve an output something like the below, if you change your ssm parameter between the second sleep in cmd.sh; the key thing to notice in this output is the 
+You should recieve an output something like the below, if you change your ssm parameter between the second sleep in [cmd.sh](cmd.sh); the value set to someconfig_url and someconfig_user will be those stored in ssm parameter store.
 
 ```
 test
@@ -87,5 +90,5 @@ This is basically just a wraper around [confd](https://github.com/kelseyhightowe
 
 ## TODO
 
-- Figure out how we can debug this when running in a docker container on a orchestrator ECS or K8.
+- Figure out how we can debug this when running in a docker container on a orchestrator ECS or K8. This will involve where to send logs or prehaps having an SNS topic that can tell us when we are getting errors from the runs of confd.
 - Test out with secrets manager through parameter store.
