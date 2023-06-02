@@ -1,6 +1,6 @@
 FROM dockage/confd:latest
 
-COPY confg-discog /usr/bin/confg-discog
+COPY confg_discog /usr/bin/confg-discog
 
 COPY confd/conf.d/myconfig.toml /etc/confd/conf.d/myconfig.toml
 COPY confd/conf.d/myconfig.conf.tmpl /etc/confd/templates/myconfig.conf.tmpl
