@@ -1,45 +1,13 @@
 package main
 
 import (
-	"log"
-	"os"
-	"os/exec"
-	"time"
+	confg_discog "confg-discog/pkg"
 )
 
+var interval = 2
+var confdLogLevel = "info"
+
 func main() {
-	log.Println("Starting confg-discog")
-
-	confdLogLevel := "info"
-
-	log.Printf("loglevel set to %s\n", confdLogLevel)
-
-	interval := 2
-
-	ticker := time.NewTicker(time.Duration(interval) * time.Second)
-	defer ticker.Stop()
-
-	for range ticker.C {
-		runConfdOnetime(confdLogLevel)
-	}
-}
-
-func runConfdOnetime(logLevel string) error {
-	confidCommand := []string{"confd", "-onetime", "-backend", "ssm", "-log-level", logLevel}
-	err := runCommand(confidCommand[0], confidCommand[1:])
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func runCommand(command string, args []string) error {
-	cmd := exec.Command(command, args...)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	err := cmd.Run()
-	if err != nil {
-		return err
-	}
-	return nil
+	cd := confg_discog.New(interval)
+	cd.Run()
 }

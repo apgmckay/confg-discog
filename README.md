@@ -84,3 +84,8 @@ after eval
 ```
 
 This is basically just a wraper around [confd](https://github.com/kelseyhightower/confd) with some shell redirection to hang this on an entrypoint of a docker container. This allows for config and secrets to be loaded synamically inside of a container from any backend supported by confd.
+
+## TODO
+
+- Figure out how we can debug this when running in a docker container on a orchestrator ECS or K8.
+- Test out with secrets manager through parameter store.
