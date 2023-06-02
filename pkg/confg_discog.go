@@ -28,11 +28,11 @@ func (cd *ConfgDiscog) SetLogLevel(logLevel string) {
 }
 
 func (cd *ConfgDiscog) Run() {
-	log.Println("Starting confg-discog")
+	log.Println("entrypoint: Starting confg-discog")
 
 	confdLogLevel := "info"
 
-	log.Printf("loglevel set to %s\n", confdLogLevel)
+	log.Printf("entrypoint: loglevel set to %s\n", confdLogLevel)
 
 	ticker := time.NewTicker(time.Duration(cd.interval) * time.Second)
 	defer ticker.Stop()
@@ -44,6 +44,7 @@ func (cd *ConfgDiscog) Run() {
 
 func (cd *ConfgDiscog) runConfdOnetime() error {
 	confidCommand := []string{"confd", "-onetime", "-backend", cd.backend, "-log-level", cd.logLevel}
+	log.Printf("entrypoint: starting command: %v", confidCommand)
 	err := runCommand(confidCommand[0], confidCommand[1:])
 	if err != nil {
 		return err
