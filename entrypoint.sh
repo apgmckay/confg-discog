@@ -1,6 +1,7 @@
 #!/bin/sh
 
 echo "test"
-
+confg-discog &
+echo "after"
 eval "${@}"
-exit 0
+echo "after eval"
