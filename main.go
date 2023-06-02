@@ -4,9 +4,8 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"time"
 )
-
-var confdRunIntervalSeconds = 2
 
 func main() {
 	log.Println("Starting confg-discog")
@@ -15,11 +14,18 @@ func main() {
 
 	log.Printf("loglevel set to %s\n", confdLogLevel)
 
-	runConfdOnetime(confdLogLevel)
+	interval := 2
+
+	ticker := time.NewTicker(time.Duration(interval) * time.Second)
+	defer ticker.Stop()
+
+	for range ticker.C {
+		runConfdOnetime(confdLogLevel)
+	}
 }
 
 func runConfdOnetime(logLevel string) error {
-	confidCommand := []string{"confd", "-backend", "ssm", "-log-level", logLevel}
+	confidCommand := []string{"confd", "-onetime", "-backend", "ssm", "-log-level", logLevel}
 	err := runCommand(confidCommand[0], confidCommand[1:])
 	if err != nil {
 		return err
