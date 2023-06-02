@@ -1,2 +1,7 @@
+.terraform.lock.hcl
+*.hcl.lock
+.terraform
+*.tfstate
+
 confg_discog
 confg-discog
