@@ -9,6 +9,8 @@ import (
 
 type ConfgDiscog struct {
 	interval int
+	backend  string
+	logLevel string
 }
 
 func New(runInterval int) ConfgDiscog {
@@ -17,23 +19,31 @@ func New(runInterval int) ConfgDiscog {
 	}
 }
 
-func (cg *ConfgDiscog) Run() {
+func (cd *ConfgDiscog) SetBackend(backend string) {
+	cd.backend = backend
+}
+
+func (cd *ConfgDiscog) SetLogLevel(logLevel string) {
+	cd.logLevel = logLevel
+}
+
+func (cd *ConfgDiscog) Run() {
 	log.Println("Starting confg-discog")
 
 	confdLogLevel := "info"
 
 	log.Printf("loglevel set to %s\n", confdLogLevel)
 
-	ticker := time.NewTicker(time.Duration(cg.interval) * time.Second)
+	ticker := time.NewTicker(time.Duration(cd.interval) * time.Second)
 	defer ticker.Stop()
 
 	for range ticker.C {
-		runConfdOnetime(confdLogLevel)
+		cd.runConfdOnetime()
 	}
 }
 
-func runConfdOnetime(logLevel string) error {
-	confidCommand := []string{"confd", "-onetime", "-backend", "ssm", "-log-level", logLevel}
+func (cd *ConfgDiscog) runConfdOnetime() error {
+	confidCommand := []string{"confd", "-onetime", "-backend", cd.backend, "-log-level", cd.logLevel}
 	err := runCommand(confidCommand[0], confidCommand[1:])
 	if err != nil {
 		return err

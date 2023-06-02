@@ -6,8 +6,10 @@ import (
 
 var interval = 2
 var confdLogLevel = "info"
+var confdBackend = "ssm"
 
 func main() {
 	cd := confg_discog.New(interval)
+	cd.SetBackend(confdBackend)
 	cd.Run()
 }
