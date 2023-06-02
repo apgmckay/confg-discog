@@ -14,21 +14,24 @@ type ConfgDiscog struct {
 }
 
 func New(runInterval int) ConfgDiscog {
+	log.Println("entrypoint: new ConfgDiscog!")
 	return ConfgDiscog{
 		interval: runInterval,
 	}
 }
 
 func (cd *ConfgDiscog) SetBackend(backend string) {
+	log.Printf("entrypoint: set backend == %s\n", backend)
 	cd.backend = backend
 }
 
 func (cd *ConfgDiscog) SetLogLevel(logLevel string) {
+	log.Printf("entrypoint: set backend == %s\n", logLevel)
 	cd.logLevel = logLevel
 }
 
 func (cd *ConfgDiscog) Run() {
-	log.Println("entrypoint: Starting confg-discog")
+	log.Println("entrypoint: ConfgDiscog Running!")
 
 	confdLogLevel := "info"
 

@@ -44,46 +44,90 @@ $ confg_discog_build_and_run
 You should recieve an output something like the below, if you change your ssm parameter between the second sleep in [cmd.sh](cmd.sh); the value set to someconfig_url and someconfig_user will be those stored in ssm parameter store.
 
 ```
-test
-after
-hello from cmd
-2023/06/02 17:16:14 Starting confg-discog
-2023/06/02 17:16:14 loglevel set to info
-2023-06-02T17:16:16Z da6a1dc7b16a confd[14]: INFO Backend set to ssm
-2023-06-02T17:16:16Z da6a1dc7b16a confd[14]: INFO Starting confd
-2023-06-02T17:16:16Z da6a1dc7b16a confd[14]: INFO Backend source(s) set to 
-2023-06-02T17:16:16Z da6a1dc7b16a confd[14]: INFO Target config /tmp/myconfig.conf out of sync
-2023-06-02T17:16:16Z da6a1dc7b16a confd[14]: INFO Target config /tmp/myconfig.conf has been updated
-2023-06-02T17:16:18Z da6a1dc7b16a confd[28]: INFO Backend set to ssm
-2023-06-02T17:16:18Z da6a1dc7b16a confd[28]: INFO Starting confd
-2023-06-02T17:16:18Z da6a1dc7b16a confd[28]: INFO Backend source(s) set to 
-cmd config url: some.example.com
-cmd config user: andy
-2023-06-02T17:16:20Z da6a1dc7b16a confd[43]: INFO Backend set to ssm
-2023-06-02T17:16:20Z da6a1dc7b16a confd[43]: INFO Starting confd
-2023-06-02T17:16:20Z da6a1dc7b16a confd[43]: INFO Backend source(s) set to 
-2023-06-02T17:16:22Z da6a1dc7b16a confd[63]: INFO Backend set to ssm
-2023-06-02T17:16:22Z da6a1dc7b16a confd[63]: INFO Starting confd
-2023-06-02T17:16:22Z da6a1dc7b16a confd[63]: INFO Backend source(s) set to 
-2023-06-02T17:16:24Z da6a1dc7b16a confd[77]: INFO Backend set to ssm
-2023-06-02T17:16:24Z da6a1dc7b16a confd[77]: INFO Starting confd
-2023-06-02T17:16:24Z da6a1dc7b16a confd[77]: INFO Backend source(s) set to 
-2023-06-02T17:16:26Z da6a1dc7b16a confd[90]: INFO Backend set to ssm
-2023-06-02T17:16:26Z da6a1dc7b16a confd[90]: INFO Starting confd
-2023-06-02T17:16:26Z da6a1dc7b16a confd[90]: INFO Backend source(s) set to 
-2023-06-02T17:16:28Z da6a1dc7b16a confd[104]: INFO Backend set to ssm
-2023-06-02T17:16:28Z da6a1dc7b16a confd[104]: INFO Starting confd
-2023-06-02T17:16:28Z da6a1dc7b16a confd[104]: INFO Backend source(s) set to 
-2023-06-02T17:16:30Z da6a1dc7b16a confd[118]: INFO Backend set to ssm
-2023-06-02T17:16:30Z da6a1dc7b16a confd[118]: INFO Starting confd
-2023-06-02T17:16:30Z da6a1dc7b16a confd[118]: INFO Backend source(s) set to 
-2023-06-02T17:16:32Z da6a1dc7b16a confd[133]: INFO Backend set to ssm
-2023-06-02T17:16:32Z da6a1dc7b16a confd[133]: INFO Starting confd
-2023-06-02T17:16:32Z da6a1dc7b16a confd[133]: INFO Backend source(s) set to 
-cmd config url: some.example.com
-cmd config user: andy
-bye from cmd
-after eval
+Sending build context to Docker daemon  370.4MB
+
+Step 1/8 : FROM dockage/confd:latest
+ ---> 729bfb969995
+Step 2/8 : COPY confg_discog /usr/bin/confg-discog
+ ---> Using cache
+ ---> 4cfb159ca15e
+Step 3/8 : COPY confd/conf.d/myconfig.toml /etc/confd/conf.d/myconfig.toml
+ ---> Using cache
+ ---> e509d572cb41
+Step 4/8 : COPY confd/conf.d/myconfig.conf.tmpl /etc/confd/templates/myconfig.conf.tmpl
+ ---> Using cache
+ ---> 13d9b5a3438b
+Step 5/8 : COPY entrypoint.sh /usr/bin/entrypoint
+ ---> Using cache
+ ---> be423a48c4c6
+Step 6/8 : COPY cmd.sh /usr/bin/cmd
+ ---> Using cache
+ ---> 0f0c1e588230
+Step 7/8 : ENTRYPOINT ["/usr/bin/entrypoint"]
+ ---> Using cache
+ ---> 1c277a27e456
+Step 8/8 : CMD ["/usr/bin/cmd"]
+ ---> Using cache
+ ---> 8a11e8afaf54
+Successfully built 8a11e8afaf54
+Successfully tagged confg_discog:latest
+entrypoint: starting
+entrypoint: config-discog started
+cmd: Hello!
+cmd: sleeping for 5
+2023/06/02 19:31:44 entrypoint: Hello!
+2023/06/02 19:31:44 entrypoint: new ConfgDiscog!
+2023/06/02 19:31:44 entrypoint: set backend == ssm
+2023/06/02 19:31:44 entrypoint: ConfgDiscog Running!
+2023/06/02 19:31:44 entrypoint: loglevel set to info
+2023/06/02 19:31:46 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-02T19:31:46Z df9f33632d8d confd[14]: INFO Backend set to ssm
+2023-06-02T19:31:46Z df9f33632d8d confd[14]: INFO Starting confd
+2023-06-02T19:31:46Z df9f33632d8d confd[14]: INFO Backend source(s) set to 
+2023-06-02T19:31:46Z df9f33632d8d confd[14]: INFO Target config /tmp/myconfig.conf out of sync
+2023-06-02T19:31:46Z df9f33632d8d confd[14]: INFO Target config /tmp/myconfig.conf has been updated
+2023/06/02 19:31:48 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-02T19:31:48Z df9f33632d8d confd[28]: INFO Backend set to ssm
+2023-06-02T19:31:48Z df9f33632d8d confd[28]: INFO Starting confd
+2023-06-02T19:31:48Z df9f33632d8d confd[28]: INFO Backend source(s) set to 
+cmd: source myconfig.conf
+cmd: someconfig_url: ␡test
+cmd: someconfig_user: test
+cmd: sleeping for 15
+2023/06/02 19:31:50 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-02T19:31:50Z df9f33632d8d confd[43]: INFO Backend set to ssm
+2023-06-02T19:31:50Z df9f33632d8d confd[43]: INFO Starting confd
+2023-06-02T19:31:50Z df9f33632d8d confd[43]: INFO Backend source(s) set to 
+2023/06/02 19:31:52 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-02T19:31:52Z df9f33632d8d confd[57]: INFO Backend set to ssm
+2023-06-02T19:31:52Z df9f33632d8d confd[57]: INFO Starting confd
+2023-06-02T19:31:52Z df9f33632d8d confd[57]: INFO Backend source(s) set to 
+2023/06/02 19:31:54 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-02T19:31:54Z df9f33632d8d confd[73]: INFO Backend set to ssm
+2023-06-02T19:31:54Z df9f33632d8d confd[73]: INFO Starting confd
+2023-06-02T19:31:54Z df9f33632d8d confd[73]: INFO Backend source(s) set to 
+2023/06/02 19:31:56 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-02T19:31:56Z df9f33632d8d confd[87]: INFO Backend set to ssm
+2023-06-02T19:31:56Z df9f33632d8d confd[87]: INFO Starting confd
+2023-06-02T19:31:56Z df9f33632d8d confd[87]: INFO Backend source(s) set to 
+2023/06/02 19:31:58 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-02T19:31:58Z df9f33632d8d confd[101]: INFO Backend set to ssm
+2023-06-02T19:31:58Z df9f33632d8d confd[101]: INFO Starting confd
+2023-06-02T19:31:58Z df9f33632d8d confd[101]: INFO Backend source(s) set to 
+2023/06/02 19:32:00 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-02T19:32:00Z df9f33632d8d confd[116]: INFO Backend set to ssm
+2023-06-02T19:32:00Z df9f33632d8d confd[116]: INFO Starting confd
+2023-06-02T19:32:00Z df9f33632d8d confd[116]: INFO Backend source(s) set to 
+2023/06/02 19:32:02 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-02T19:32:02Z df9f33632d8d confd[131]: INFO Backend set to ssm
+2023-06-02T19:32:02Z df9f33632d8d confd[131]: INFO Starting confd
+2023-06-02T19:32:02Z df9f33632d8d confd[131]: INFO Backend source(s) set to 
+cmd: source myconfig.conf
+cmd: someconfig_url: ␡test
+cmd: someconfig_user: test
+cmd: bye
+2023/06/02 19:32:04 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+entrypoint: after eval
 ```
 
 This is basically just a wraper around [confd](https://github.com/kelseyhightower/confd) with some shell redirection to hang this on an entrypoint of a docker container. This allows for config and secrets to be loaded synamically inside of a container from any backend supported by confd.
