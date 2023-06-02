@@ -1,15 +1,12 @@
-variable "secrets_store_name" {
+//variable "secrets_store_name" {
+//  type = string
+//}
+//
+
+variable "someconfig_url_value" {
   type = string
 }
 
-variable "parameter_store_name" {
-  type = string
-}
-
-variable "parameter_store_value" {
-  type = string
-}
-
-variable "sns_topic_name" {
+variable "someconfig_user_value" {
   type = string
 }

@@ -15,6 +15,15 @@ $$ |  $$\ $$ |  $$ |$$ |  $$ |$$ |     $$ |  $$ |        $$ |  $$ |$$ | \____$$\
                                        \$$$$$$  |                                                    \$$$$$$  |
                                         \______/                                                      \______/
 ```
+## Config
+
+To config confd to try this out you will need to run the terraform code in the [_terraform](_terraform) directory.
+
+This can be done with a basic terraform init, plan and apply.
+
+Make a note of the parameter you use to populate these ssm parameters.
+
+Go through the instructions in Development.
 
 ## Development
 
@@ -32,45 +41,44 @@ $ confg_discog_build_and_run
 You should recieve an output something like the below, if you change your ssm parameter between the second sleep in cmd.sh; the key thing to notice in this output is the 
 
 ```
+test
+after
 hello from cmd
-2023/06/02 16:44:05 Starting confg-discog
-2023/06/02 16:44:05 loglevel set to info
-2023-06-02T16:44:07Z 3a63172cba85 confd[14]: INFO Backend set to ssm
-2023-06-02T16:44:07Z 3a63172cba85 confd[14]: INFO Starting confd
-2023-06-02T16:44:07Z 3a63172cba85 confd[14]: INFO Backend source(s) set to 
-2023-06-02T16:44:07Z 3a63172cba85 confd[14]: INFO Target config /tmp/myconfig.conf out of sync
-2023-06-02T16:44:07Z 3a63172cba85 confd[14]: INFO Target config /tmp/myconfig.conf has been updated
-2023-06-02T16:44:09Z 3a63172cba85 confd[28]: INFO Backend set to ssm
-2023-06-02T16:44:09Z 3a63172cba85 confd[28]: INFO Starting confd
-2023-06-02T16:44:09Z 3a63172cba85 confd[28]: INFO Backend source(s) set to 
-cmd db url: db.example2.com
-cmd db user: test
-2023-06-02T16:44:11Z 3a63172cba85 confd[44]: INFO Backend set to ssm
-2023-06-02T16:44:11Z 3a63172cba85 confd[44]: INFO Starting confd
-2023-06-02T16:44:11Z 3a63172cba85 confd[44]: INFO Backend source(s) set to 
-2023-06-02T16:44:13Z 3a63172cba85 confd[59]: INFO Backend set to ssm
-2023-06-02T16:44:13Z 3a63172cba85 confd[59]: INFO Starting confd
-2023-06-02T16:44:13Z 3a63172cba85 confd[59]: INFO Backend source(s) set to 
-2023-06-02T16:44:15Z 3a63172cba85 confd[74]: INFO Backend set to ssm
-2023-06-02T16:44:15Z 3a63172cba85 confd[74]: INFO Starting confd
-2023-06-02T16:44:15Z 3a63172cba85 confd[74]: INFO Backend source(s) set to 
-2023-06-02T16:44:17Z 3a63172cba85 confd[89]: INFO Backend set to ssm
-2023-06-02T16:44:17Z 3a63172cba85 confd[89]: INFO Starting confd
-2023-06-02T16:44:17Z 3a63172cba85 confd[89]: INFO Backend source(s) set to 
-2023-06-02T16:44:19Z 3a63172cba85 confd[103]: INFO Backend set to ssm
-2023-06-02T16:44:19Z 3a63172cba85 confd[103]: INFO Starting confd
-2023-06-02T16:44:19Z 3a63172cba85 confd[103]: INFO Backend source(s) set to 
-2023-06-02T16:44:21Z 3a63172cba85 confd[117]: INFO Backend set to ssm
-2023-06-02T16:44:21Z 3a63172cba85 confd[117]: INFO Starting confd
-2023-06-02T16:44:21Z 3a63172cba85 confd[117]: INFO Backend source(s) set to 
-2023-06-02T16:44:21Z 3a63172cba85 confd[117]: INFO /tmp/myconfig.conf has md5sum 79a6ed64d03a7b116744f36a3f13940a should be 72b1af80140ab6de65ebdbba20350a67
-2023-06-02T16:44:21Z 3a63172cba85 confd[117]: INFO Target config /tmp/myconfig.conf out of sync
-2023-06-02T16:44:21Z 3a63172cba85 confd[117]: INFO Target config /tmp/myconfig.conf has been updated
-2023-06-02T16:44:23Z 3a63172cba85 confd[131]: INFO Backend set to ssm
-2023-06-02T16:44:23Z 3a63172cba85 confd[131]: INFO Starting confd
-2023-06-02T16:44:23Z 3a63172cba85 confd[131]: INFO Backend source(s) set to 
-cmd db url: db.example.com
-cmd db user: test
+2023/06/02 17:16:14 Starting confg-discog
+2023/06/02 17:16:14 loglevel set to info
+2023-06-02T17:16:16Z da6a1dc7b16a confd[14]: INFO Backend set to ssm
+2023-06-02T17:16:16Z da6a1dc7b16a confd[14]: INFO Starting confd
+2023-06-02T17:16:16Z da6a1dc7b16a confd[14]: INFO Backend source(s) set to 
+2023-06-02T17:16:16Z da6a1dc7b16a confd[14]: INFO Target config /tmp/myconfig.conf out of sync
+2023-06-02T17:16:16Z da6a1dc7b16a confd[14]: INFO Target config /tmp/myconfig.conf has been updated
+2023-06-02T17:16:18Z da6a1dc7b16a confd[28]: INFO Backend set to ssm
+2023-06-02T17:16:18Z da6a1dc7b16a confd[28]: INFO Starting confd
+2023-06-02T17:16:18Z da6a1dc7b16a confd[28]: INFO Backend source(s) set to 
+cmd config url: some.example.com
+cmd config user: andy
+2023-06-02T17:16:20Z da6a1dc7b16a confd[43]: INFO Backend set to ssm
+2023-06-02T17:16:20Z da6a1dc7b16a confd[43]: INFO Starting confd
+2023-06-02T17:16:20Z da6a1dc7b16a confd[43]: INFO Backend source(s) set to 
+2023-06-02T17:16:22Z da6a1dc7b16a confd[63]: INFO Backend set to ssm
+2023-06-02T17:16:22Z da6a1dc7b16a confd[63]: INFO Starting confd
+2023-06-02T17:16:22Z da6a1dc7b16a confd[63]: INFO Backend source(s) set to 
+2023-06-02T17:16:24Z da6a1dc7b16a confd[77]: INFO Backend set to ssm
+2023-06-02T17:16:24Z da6a1dc7b16a confd[77]: INFO Starting confd
+2023-06-02T17:16:24Z da6a1dc7b16a confd[77]: INFO Backend source(s) set to 
+2023-06-02T17:16:26Z da6a1dc7b16a confd[90]: INFO Backend set to ssm
+2023-06-02T17:16:26Z da6a1dc7b16a confd[90]: INFO Starting confd
+2023-06-02T17:16:26Z da6a1dc7b16a confd[90]: INFO Backend source(s) set to 
+2023-06-02T17:16:28Z da6a1dc7b16a confd[104]: INFO Backend set to ssm
+2023-06-02T17:16:28Z da6a1dc7b16a confd[104]: INFO Starting confd
+2023-06-02T17:16:28Z da6a1dc7b16a confd[104]: INFO Backend source(s) set to 
+2023-06-02T17:16:30Z da6a1dc7b16a confd[118]: INFO Backend set to ssm
+2023-06-02T17:16:30Z da6a1dc7b16a confd[118]: INFO Starting confd
+2023-06-02T17:16:30Z da6a1dc7b16a confd[118]: INFO Backend source(s) set to 
+2023-06-02T17:16:32Z da6a1dc7b16a confd[133]: INFO Backend set to ssm
+2023-06-02T17:16:32Z da6a1dc7b16a confd[133]: INFO Starting confd
+2023-06-02T17:16:32Z da6a1dc7b16a confd[133]: INFO Backend source(s) set to 
+cmd config url: some.example.com
+cmd config user: andy
 bye from cmd
 after eval
 ```

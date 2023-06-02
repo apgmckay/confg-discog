@@ -1,8 +1,8 @@
 #!/bin/sh
 
 function print_ssm_values {
-  echo "cmd db url: ${DATABASE_URL}"
-  echo "cmd db user: ${DATABASE_USER}"
+  echo "cmd config url: ${DATABASE_URL}"
+  echo "cmd config user: ${DATABASE_USER}"
 }
 
 echo "hello from cmd"
