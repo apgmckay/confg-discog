@@ -9,5 +9,5 @@ output "someconfig_user" {
 }
 
 output "someconfg_password_v_id" {
-  value = aws_secretsmanager_secret_version.example_secret_version.version_id
+  value = aws_secretsmanager_secret_version.someconfig_password.version_id
 }
