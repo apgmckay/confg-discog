@@ -8,10 +8,11 @@ import (
 )
 
 type ConfgDiscog struct {
-	interval  int
-	backend   string
-	logLevel  string
-	logPrefix string
+	interval   int
+	backend    string
+	logLevel   string
+	logPrefix  string
+	configFile string
 }
 
 func New(runInterval int) ConfgDiscog {
@@ -38,6 +39,11 @@ func (cd *ConfgDiscog) SetLogLevel(logLevel string) {
 	cd.logLevel = logLevel
 }
 
+func (cd *ConfgDiscog) SetConfigFile(configFileName string) {
+	log.Printf("entrypoint: set config-file == %s\n", configFileName)
+	cd.configFile = configFileName
+}
+
 func (cd *ConfgDiscog) Run() {
 	log.Printf("%s ConfgDiscog Running!", cd.logPrefix)
 
@@ -48,14 +54,27 @@ func (cd *ConfgDiscog) Run() {
 	ticker := time.NewTicker(time.Duration(cd.interval) * time.Second)
 	defer ticker.Stop()
 
+	cd.SetConfigFile("/etc/confd/conf.d/secret_version.toml")
+	cd.runConfdOnetime()
+
+	cd.SetConfigFile("")
 	for range ticker.C {
 		cd.runConfdOnetime()
 	}
 }
 
 func (cd *ConfgDiscog) runConfdOnetime() error {
+	var configFileArg []string
+	if len(cd.configFile) > 0 {
+		configFileArg = []string{"-config-file", cd.configFile}
+	}
 	confidCommand := []string{"confd", "-onetime", "-backend", cd.backend, "-log-level", cd.logLevel}
+
 	log.Printf("%s starting command: %v", cd.logPrefix, confidCommand)
+
+	confidCommand = append(confidCommand, configFileArg...)
+	log.Printf("%s starting command: %v", cd.logPrefix, confidCommand)
+
 	err := runCommand(confidCommand[0], confidCommand[1:])
 	if err != nil {
 		return err

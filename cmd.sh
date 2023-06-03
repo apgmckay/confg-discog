@@ -20,7 +20,7 @@ print_ssm_values
 
 echo "cmd: sleeping for 15"
 
-sleep 15
+sleep 30
 
 echo "cmd: source myconfig.conf"
 

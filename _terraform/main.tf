@@ -12,8 +12,15 @@ resource "aws_ssm_parameter" "someconfig_user" {
   value       = var.someconfig_user_value
 }
 
+resource "aws_ssm_parameter" "someconfig_secret_version" {
+  name        = "someconfig_secret_version"
+  description = "latest secret version id"
+  type        = "String"
+  value       = aws_secretsmanager_secret_version.someconfig_password.version_id
+}
+
 resource "aws_secretsmanager_secret" "someconfg_password" {
-  name = "someconfig_password_1"
+  name = "someconfig_password_2"
 }
 
 resource "aws_secretsmanager_secret_version" "someconfig_password" {
@@ -23,3 +30,4 @@ resource "aws_secretsmanager_secret_version" "someconfig_password" {
     password = "supersecret"
   })
 }
+
