@@ -20,6 +20,11 @@ func New(runInterval int) ConfgDiscog {
 	}
 }
 
+func (cd *ConfgDiscog) SetInterval(runInterval int) {
+	log.Println("entrypoint: set interval == %d\n", runInterval)
+	cd.interval = runInterval
+}
+
 func (cd *ConfgDiscog) SetBackend(backend string) {
 	log.Printf("entrypoint: set backend == %s\n", backend)
 	cd.backend = backend

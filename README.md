@@ -50,83 +50,85 @@ Step 1/8 : FROM dockage/confd:latest
  ---> 729bfb969995
 Step 2/8 : COPY confg_discog /usr/bin/confg-discog
  ---> Using cache
- ---> 4cfb159ca15e
+ ---> 03871afa8d0c
 Step 3/8 : COPY confd/conf.d/myconfig.toml /etc/confd/conf.d/myconfig.toml
  ---> Using cache
- ---> e509d572cb41
+ ---> 4910bbfd6f74
 Step 4/8 : COPY confd/conf.d/myconfig.conf.tmpl /etc/confd/templates/myconfig.conf.tmpl
  ---> Using cache
- ---> 13d9b5a3438b
+ ---> 06dfad23f7b4
 Step 5/8 : COPY entrypoint.sh /usr/bin/entrypoint
  ---> Using cache
- ---> be423a48c4c6
+ ---> 29ffb1f061da
 Step 6/8 : COPY cmd.sh /usr/bin/cmd
  ---> Using cache
- ---> 0f0c1e588230
+ ---> f373354e10d3
 Step 7/8 : ENTRYPOINT ["/usr/bin/entrypoint"]
  ---> Using cache
- ---> 1c277a27e456
+ ---> 2d85c44b20b1
 Step 8/8 : CMD ["/usr/bin/cmd"]
  ---> Using cache
- ---> 8a11e8afaf54
-Successfully built 8a11e8afaf54
+ ---> 555229ddacf6
+Successfully built 555229ddacf6
 Successfully tagged confg_discog:latest
 entrypoint: starting
 entrypoint: config-discog started
 cmd: Hello!
 cmd: sleeping for 5
-2023/06/02 19:31:44 entrypoint: Hello!
-2023/06/02 19:31:44 entrypoint: new ConfgDiscog!
-2023/06/02 19:31:44 entrypoint: set backend == ssm
-2023/06/02 19:31:44 entrypoint: ConfgDiscog Running!
-2023/06/02 19:31:44 entrypoint: loglevel set to info
-2023/06/02 19:31:46 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-02T19:31:46Z df9f33632d8d confd[14]: INFO Backend set to ssm
-2023-06-02T19:31:46Z df9f33632d8d confd[14]: INFO Starting confd
-2023-06-02T19:31:46Z df9f33632d8d confd[14]: INFO Backend source(s) set to 
-2023-06-02T19:31:46Z df9f33632d8d confd[14]: INFO Target config /tmp/myconfig.conf out of sync
-2023-06-02T19:31:46Z df9f33632d8d confd[14]: INFO Target config /tmp/myconfig.conf has been updated
-2023/06/02 19:31:48 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-02T19:31:48Z df9f33632d8d confd[28]: INFO Backend set to ssm
-2023-06-02T19:31:48Z df9f33632d8d confd[28]: INFO Starting confd
-2023-06-02T19:31:48Z df9f33632d8d confd[28]: INFO Backend source(s) set to 
+2023/06/03 17:05:23 entrypoint: Hello!
+2023/06/03 17:05:23 entrypoint: new ConfgDiscog!
+2023/06/03 17:05:23 entrypoint: set backend == ssm
+2023/06/03 17:05:23 entrypoint: ConfgDiscog Running!
+2023/06/03 17:05:23 entrypoint: loglevel set to info
+2023/06/03 17:05:25 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-03T17:05:25Z 3769e7cfc73e confd[14]: INFO Backend set to ssm
+2023-06-03T17:05:25Z 3769e7cfc73e confd[14]: INFO Starting confd
+2023-06-03T17:05:25Z 3769e7cfc73e confd[14]: INFO Backend source(s) set to 
+2023-06-03T17:05:26Z 3769e7cfc73e confd[14]: INFO Target config /tmp/myconfig.conf out of sync
+2023-06-03T17:05:26Z 3769e7cfc73e confd[14]: INFO Target config /tmp/myconfig.conf has been updated
+2023/06/03 17:05:27 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-03T17:05:27Z 3769e7cfc73e confd[28]: INFO Backend set to ssm
+2023-06-03T17:05:27Z 3769e7cfc73e confd[28]: INFO Starting confd
+2023-06-03T17:05:27Z 3769e7cfc73e confd[28]: INFO Backend source(s) set to 
 cmd: source myconfig.conf
-cmd: someconfig_url: ␡test
-cmd: someconfig_user: test
+cmd: someconfig_url: example.com
+cmd: someconfig_user: andy
+cmd: someconfig_password: {password:supersecret,username:admin,admin_password:somepassword}
 cmd: sleeping for 15
-2023/06/02 19:31:50 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-02T19:31:50Z df9f33632d8d confd[43]: INFO Backend set to ssm
-2023-06-02T19:31:50Z df9f33632d8d confd[43]: INFO Starting confd
-2023-06-02T19:31:50Z df9f33632d8d confd[43]: INFO Backend source(s) set to 
-2023/06/02 19:31:52 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-02T19:31:52Z df9f33632d8d confd[57]: INFO Backend set to ssm
-2023-06-02T19:31:52Z df9f33632d8d confd[57]: INFO Starting confd
-2023-06-02T19:31:52Z df9f33632d8d confd[57]: INFO Backend source(s) set to 
-2023/06/02 19:31:54 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-02T19:31:54Z df9f33632d8d confd[73]: INFO Backend set to ssm
-2023-06-02T19:31:54Z df9f33632d8d confd[73]: INFO Starting confd
-2023-06-02T19:31:54Z df9f33632d8d confd[73]: INFO Backend source(s) set to 
-2023/06/02 19:31:56 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-02T19:31:56Z df9f33632d8d confd[87]: INFO Backend set to ssm
-2023-06-02T19:31:56Z df9f33632d8d confd[87]: INFO Starting confd
-2023-06-02T19:31:56Z df9f33632d8d confd[87]: INFO Backend source(s) set to 
-2023/06/02 19:31:58 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-02T19:31:58Z df9f33632d8d confd[101]: INFO Backend set to ssm
-2023-06-02T19:31:58Z df9f33632d8d confd[101]: INFO Starting confd
-2023-06-02T19:31:58Z df9f33632d8d confd[101]: INFO Backend source(s) set to 
-2023/06/02 19:32:00 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-02T19:32:00Z df9f33632d8d confd[116]: INFO Backend set to ssm
-2023-06-02T19:32:00Z df9f33632d8d confd[116]: INFO Starting confd
-2023-06-02T19:32:00Z df9f33632d8d confd[116]: INFO Backend source(s) set to 
-2023/06/02 19:32:02 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-02T19:32:02Z df9f33632d8d confd[131]: INFO Backend set to ssm
-2023-06-02T19:32:02Z df9f33632d8d confd[131]: INFO Starting confd
-2023-06-02T19:32:02Z df9f33632d8d confd[131]: INFO Backend source(s) set to 
+2023/06/03 17:05:29 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-03T17:05:29Z 3769e7cfc73e confd[43]: INFO Backend set to ssm
+2023-06-03T17:05:29Z 3769e7cfc73e confd[43]: INFO Starting confd
+2023-06-03T17:05:29Z 3769e7cfc73e confd[43]: INFO Backend source(s) set to 
+2023/06/03 17:05:31 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-03T17:05:31Z 3769e7cfc73e confd[57]: INFO Backend set to ssm
+2023-06-03T17:05:31Z 3769e7cfc73e confd[57]: INFO Starting confd
+2023-06-03T17:05:31Z 3769e7cfc73e confd[57]: INFO Backend source(s) set to 
+2023/06/03 17:05:33 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-03T17:05:33Z 3769e7cfc73e confd[70]: INFO Backend set to ssm
+2023-06-03T17:05:33Z 3769e7cfc73e confd[70]: INFO Starting confd
+2023-06-03T17:05:33Z 3769e7cfc73e confd[70]: INFO Backend source(s) set to 
+2023/06/03 17:05:35 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-03T17:05:35Z 3769e7cfc73e confd[84]: INFO Backend set to ssm
+2023-06-03T17:05:35Z 3769e7cfc73e confd[84]: INFO Starting confd
+2023-06-03T17:05:35Z 3769e7cfc73e confd[84]: INFO Backend source(s) set to 
+2023/06/03 17:05:37 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-03T17:05:37Z 3769e7cfc73e confd[97]: INFO Backend set to ssm
+2023-06-03T17:05:37Z 3769e7cfc73e confd[97]: INFO Starting confd
+2023-06-03T17:05:37Z 3769e7cfc73e confd[97]: INFO Backend source(s) set to 
+2023/06/03 17:05:39 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-03T17:05:39Z 3769e7cfc73e confd[111]: INFO Backend set to ssm
+2023-06-03T17:05:39Z 3769e7cfc73e confd[111]: INFO Starting confd
+2023-06-03T17:05:39Z 3769e7cfc73e confd[111]: INFO Backend source(s) set to 
+2023/06/03 17:05:41 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
+2023-06-03T17:05:41Z 3769e7cfc73e confd[125]: INFO Backend set to ssm
+2023-06-03T17:05:41Z 3769e7cfc73e confd[125]: INFO Starting confd
+2023-06-03T17:05:41Z 3769e7cfc73e confd[125]: INFO Backend source(s) set to 
+2023/06/03 17:05:43 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
 cmd: source myconfig.conf
-cmd: someconfig_url: ␡test
-cmd: someconfig_user: test
+cmd: someconfig_url: example.com
+cmd: someconfig_user: andy
+cmd: someconfig_password: {password:supersecret,username:admin,admin_password:somepassword}
 cmd: bye
-2023/06/02 19:32:04 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
 entrypoint: after eval
 ```
 

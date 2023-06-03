@@ -3,6 +3,7 @@
 function print_ssm_values {
   echo "cmd: someconfig_url: ${DATABASE_URL}"
   echo "cmd: someconfig_user: ${DATABASE_USER}"
+  echo "cmd: someconfig_password: ${DATABASE_PASSWORD}"
 }
 
 echo "cmd: Hello!"
