@@ -1,3 +1,7 @@
+locals {
+  secret_name = format("someconfig_password_%s", substr(random_uuid.id.id, 0, 6))
+}
+
 resource "aws_ssm_parameter" "someconfig_url" {
   name        = "someconfig_url"
   description = "Test fixture for ssm parameter store"
@@ -19,8 +23,12 @@ resource "aws_ssm_parameter" "someconfig_secret_version" {
   value       = aws_secretsmanager_secret_version.someconfig_password.version_id
 }
 
+resource "random_uuid" "id" {
+
+}
+
 resource "aws_secretsmanager_secret" "someconfg_password" {
-  name = "someconfig_password_2"
+  name = local.secret_name
 }
 
 resource "aws_secretsmanager_secret_version" "someconfig_password" {
@@ -30,4 +38,3 @@ resource "aws_secretsmanager_secret_version" "someconfig_password" {
     password = "supersecret"
   })
 }
-

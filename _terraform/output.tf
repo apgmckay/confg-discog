@@ -8,6 +8,6 @@ output "someconfig_user" {
   sensitive = true
 }
 
-output "someconfg_password_v_id" {
-  value = aws_secretsmanager_secret_version.someconfig_password.version_id
+output "secret_name" {
+  value = local.secret_name
 }

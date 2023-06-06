@@ -7,25 +7,15 @@ function print_ssm_values {
 }
 
 echo "cmd: Hello!"
-
 echo "cmd: sleeping for 5"
-
 sleep 5 
-
 echo "cmd: source myconfig.conf"
-
 source /tmp/myconfig.conf
-
 print_ssm_values
-
 echo "cmd: sleeping for 15"
-
 sleep 30
-
 echo "cmd: source myconfig.conf"
-
 source /tmp/myconfig.conf
-
+sleep 30
 print_ssm_values
-
 echo "cmd: bye"

@@ -5,5 +5,6 @@ dest = "/tmp/myconfig.conf"
 keys = [
     "/someconfig_user",
     "/someconfig_url",
-    "/aws/reference/secretsmanager/someconfig_password_2",
+    "/aws/reference/secretsmanager/someconfig_password_fc46f2",
 ]
+reload_cmd = "echo hello"
