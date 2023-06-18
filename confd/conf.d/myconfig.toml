@@ -1,0 +1,10 @@
+[template]
+src = "myconfig.conf.tmpl"
+dest = "/tmp/myconfig.conf"
+# Replace a3e9c13b-cc1f-40c9-b300-f8b4bfa96e49 with a secrets version id
+keys = [
+    "/someconfig_user",
+    "/someconfig_url",
+    "/aws/reference/secretsmanager/someconfig_password_fc46f2",
+]
+reload_cmd = "echo hello"
