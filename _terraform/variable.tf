@@ -1,6 +1,6 @@
 variable "parameter_prefix" {
   type        = string
-  default     = "config_discog"
+  default     = "confg_discog"
   description = "prefix that will be appended to all parameter namespace, this will appear in the format /confg_discog/var.parameter_prefix/"
 }
 

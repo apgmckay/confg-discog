@@ -54,7 +54,7 @@ func (cd *ConfgDiscog) Run() {
 	ticker := time.NewTicker(time.Duration(cd.interval) * time.Second)
 	defer ticker.Stop()
 
-	cd.SetConfigFile("/etc/confd/conf.d/secret_version.toml")
+	cd.SetConfigFile("/etc/confd/conf.d/myconfig.toml")
 	cd.runConfdOnetime()
 
 	cd.SetConfigFile("")
