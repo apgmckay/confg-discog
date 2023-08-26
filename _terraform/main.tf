@@ -1,40 +1,21 @@
 locals {
-  secret_name = format("someconfig_password_%s", substr(random_uuid.id.id, 0, 6))
+  default_prefix = "confg_discog"
+  input_prefix   = var.parameter_prefix
+  prefix         = format("/%s/%s", local.default_prefix, local.input_prefix)
+
+  ssm_param_prefixed_objects = [
+    for obj in var.params :
+    {
+      name  = format("%s/%s", local.prefix, obj.name)
+      value = obj.value
+      type  = obj.type
+    }
+  ]
 }
 
-resource "aws_ssm_parameter" "someconfig_url" {
-  name        = "someconfig_url"
-  description = "Test fixture for ssm parameter store"
-  type        = "String"
-  value       = var.someconfig_url_value
-}
-
-resource "aws_ssm_parameter" "someconfig_user" {
-  name        = "someconfig_user"
-  description = "Test fixture for ssm parameter store"
-  type        = "String"
-  value       = var.someconfig_user_value
-}
-
-resource "aws_ssm_parameter" "someconfig_secret_version" {
-  name        = "someconfig_secret_version"
-  description = "latest secret version id"
-  type        = "String"
-  value       = aws_secretsmanager_secret_version.someconfig_password.version_id
-}
-
-resource "random_uuid" "id" {
-
-}
-
-resource "aws_secretsmanager_secret" "someconfg_password" {
-  name = local.secret_name
-}
-
-resource "aws_secretsmanager_secret_version" "someconfig_password" {
-  secret_id = aws_secretsmanager_secret.someconfg_password.id
-  secret_string = jsonencode({
-    username = "admin",
-    password = "supersecret"
-  })
+resource "aws_ssm_parameter" "params" {
+  count = length(var.params)
+  name  = local.ssm_param_prefixed_objects[count.index].name
+  type  = local.ssm_param_prefixed_objects[count.index].type
+  value = local.ssm_param_prefixed_objects[count.index].value
 }
