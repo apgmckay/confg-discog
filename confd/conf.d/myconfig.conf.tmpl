@@ -1,4 +1,4 @@
 #/bin/sh
-export DATABASE_URL={{getv "/someconfig_url"}}
-export DATABASE_USER={{getv "/someconfig_user"}}
-export DATABASE_PASSWORD={{getv "/aws/reference/secretsmanager/someconfig_password_fc46f2"}}
+export DATABASE_URL={{getv "/confg_discog/confg_discog/app_url"}}
+export DATABASE_USER={{getv "/confg_discog/confg_discog/app_username"}}
+export DATABASE_PASSWORD={{getv "/confg_discog/confg_discog/app_password"}}
