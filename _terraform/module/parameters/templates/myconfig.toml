@@ -1,0 +1,8 @@
+[template]
+src = "myconfig.conf.tmpl"
+dest = "/tmp/myconfig.conf"
+keys = [
+%{ for param_name in param_names ~}
+  ${param_name}
+%{ endfor ~}
+]

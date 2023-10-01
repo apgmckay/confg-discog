@@ -1,3 +1,8 @@
+locals {
+  # TODO: If the intent is for this to be a temporary scratch dir then this needs to be more random to prevent naming collisions
+  confgd_toml_filepath = "../some_newdir/"
+}
+
 module "platform" {
   source           = "./module/parameters"
   parameter_prefix = "platform"
@@ -17,6 +22,7 @@ module "platform" {
       type  = "String"
     }
   ]
+  template_output_path = local.confgd_toml_filepath
 }
 
 
@@ -44,4 +50,5 @@ module "app" {
       type  = "SecureString"
     }
   ]
+  template_output_path = local.confgd_toml_filepath
 }
