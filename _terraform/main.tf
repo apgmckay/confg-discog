@@ -22,6 +22,7 @@ module "platform" {
       type  = "String"
     }
   ]
+  template_render      = var.template_render
   template_output_path = local.confgd_toml_filepath
 }
 
@@ -50,5 +51,6 @@ module "app" {
       type  = "SecureString"
     }
   ]
+  template_render      = var.template_render
   template_output_path = local.confgd_toml_filepath
 }

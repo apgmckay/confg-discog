@@ -24,9 +24,10 @@ resource "aws_ssm_parameter" "params" {
 }
 
 
-resource "local_file" "foo" {
-  content  = templatefile("${path.module}/templates/myconfig.toml", { param_names = local.param_names })
-  filename = format("%s/%s", local.templatefilepath, "hello_world")
+resource "local_file" "confg_discog_template_toml" {
+  count    = var.template_render == true ? 1 : 0
+  content  = templatefile("${path.module}/templates/myconfig.toml.tmpl", { param_names = local.param_names })
+  filename = format("%s/%s", local.templatefilepath, "myconfig.toml")
 }
 
 output "template_filepath" {
@@ -36,5 +37,5 @@ output "template_filepath" {
 
 output "template_file_contents" {
   description = "Template file contents."
-  value       = templatefile("${path.module}/templates/myconfig.toml", { param_names = local.param_names })
+  value       = templatefile("${path.module}/templates/myconfig.toml.tmpl", { param_names = local.param_names })
 }

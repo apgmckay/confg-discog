@@ -34,6 +34,11 @@ variable "params" {
   ]
 }
 
+variable "template_render" {
+  type        = bool
+  description = "Render confgd toml config file?"
+}
+
 variable "template_output_path" {
   type        = string
   description = "Path of where to render confgd toml template."
