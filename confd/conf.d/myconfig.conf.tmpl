@@ -1,4 +1,9 @@
 #/bin/sh
-export DATABASE_URL={{getv "/confg_discog/confg_discog/app_url"}}
-export DATABASE_USER={{getv "/confg_discog/confg_discog/app_username"}}
-export DATABASE_PASSWORD={{getv "/confg_discog/confg_discog/app_password"}}
+echo "app load envs"
+export DATABASE_URL={{getv "/confg_discog/app/app_url"}}
+export DATABASE_USER={{getv "/confg_discog/app/app_username"}}
+export DATABASE_PASSWORD={{getv "/confg_discog/app/app_password"}}
+
+export DB_CONNECTION_STRING={{getv "/confg_discog/platform/db_connection_string"}}
+export DB_NAME={{getv "/confg_discog/platform/db_name"}}
+export REDIS_CONNECTION_STRING={{getv "/confg_discog/platform/redis_connection_string"}}

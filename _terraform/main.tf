@@ -1,21 +1,47 @@
-locals {
-  default_prefix = "confg_discog"
-  input_prefix   = var.parameter_prefix
-  prefix         = format("/%s/%s", local.default_prefix, local.input_prefix)
-
-  ssm_param_prefixed_objects = [
-    for obj in var.params :
+module "platform" {
+  source           = "./module/parameters"
+  parameter_prefix = "platform"
+  params = [{
+    name  = "db_connection_string"
+    value = "mongodb://some-connection-string/"
+    type  = "String"
+    },
     {
-      name  = format("%s/%s", local.prefix, obj.name)
-      value = obj.value
-      type  = obj.type
+      name  = "db_name"
+      value = "app_name"
+      type  = "SecureString"
+    },
+    {
+      name  = "redis_connection_string"
+      value = "some-elasticache-endpoint.cache.amazonaws.com"
+      type  = "String"
     }
   ]
 }
 
-resource "aws_ssm_parameter" "params" {
-  count = length(var.params)
-  name  = local.ssm_param_prefixed_objects[count.index].name
-  type  = local.ssm_param_prefixed_objects[count.index].type
-  value = local.ssm_param_prefixed_objects[count.index].value
+
+module "app" {
+  source           = "./module/parameters"
+  parameter_prefix = "app"
+  params = [{
+    name  = "app_username"
+    value = "andy"
+    type  = "String"
+    },
+    {
+      name  = "app_password"
+      value = "mysafepassword"
+      type  = "SecureString"
+    },
+    {
+      name  = "app_url"
+      value = "myapiurl.co.uk"
+      type  = "String"
+    },
+    {
+      name  = "api_tokent"
+      value = "6f5902ac237024bdd0c176cb93063dc4"
+      type  = "SecureString"
+    }
+  ]
 }
