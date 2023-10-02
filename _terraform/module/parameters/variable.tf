@@ -10,7 +10,7 @@ variable "params" {
     value = string
     type  = string
   }))
-  description = "Names values and types of the parameter that are going to be stored."
+  description = "Names values and types of the parameter that are going to be created/updated."
   default = [{
     name  = "app_username"
     value = "andy"
