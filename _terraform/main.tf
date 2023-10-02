@@ -23,7 +23,7 @@ module "platform" {
     }
   ]
   template_render      = var.template_render
-  template_output_path = local.confgd_toml_filepath
+  template_output_path = var.confgd_toml_filepath
 }
 
 
@@ -52,5 +52,5 @@ module "app" {
     }
   ]
   template_render      = var.template_render
-  template_output_path = local.confgd_toml_filepath
+  template_output_path = var.confgd_toml_filepath
 }
