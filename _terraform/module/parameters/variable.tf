@@ -1,3 +1,9 @@
+variable "platform_params_path_prefix" {
+  type        = string
+  description = "Prefix path that will be used to gather pre existing parameters."
+  default     = ""
+}
+
 variable "parameter_prefix" {
   type        = string
   default     = "bnw"

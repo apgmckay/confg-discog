@@ -2,6 +2,9 @@
 src = "myconfig.sh.tmpl"
 dest = "/tmp/myconfig.sh"
 keys = [
+%{ for platform_param_name in platform_param_names ~}
+  ${platform_param_name}
+%{ endfor ~}
 %{ for param_name in param_names ~}
   ${param_name}
 %{ endfor ~}
