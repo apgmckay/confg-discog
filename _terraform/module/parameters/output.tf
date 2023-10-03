@@ -10,7 +10,7 @@ output "template_filepath" {
   value       = local.templatefilepath
 }
 
-output "template_file_contents" {
+output "template_confgd_config_toml_contents" {
   description = "Template file contents."
-  value       = local.confgd_toml_file
+  value       = local.cgd_config_toml_file
 }

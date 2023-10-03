@@ -1,16 +1,11 @@
 #/bin/sh
-echo "app load envs"
+echo "platform load envs"
+%{ for platform_param_name_bash_env_var in platform_param_name_bash_env_vars ~}
 %{ for platform_param_name in platform_param_names ~}
-export  upper("${upper(${platform_param_name})})=${platform_param_name}
+export ${platform_param_name_bash_env_var}=$${{getv ${platform_param_name}}}
 %{ endfor ~}
+%{ endfor ~}
+echo "app load envs"
 %{ for param_name in param_names ~}
 export  ${param_name}
 %{ endfor ~}
-]
-export DATABASE_URL={{getv "/confg_discog/app/app_url"}}
-export DATABASE_USER={{getv "/confg_discog/app/app_username"}}
-export DATABASE_PASSWORD={{getv "/confg_discog/app/app_password"}}
-
-export DB_CONNECTION_STRING={{getv "/confg_discog/platform/db_connection_string"}}
-export DB_NAME={{getv "/confg_discog/platform/db_name"}}
-export REDIS_CONNECTION_STRING={{getv "/confg_discog/platform/redis_connection_string"}}
