@@ -1,7 +1,7 @@
 module "app" {
-  source = "./module/parameters"
-  //  platform_params_path_prefix = "/test"
-  parameter_prefix = "app"
+  source                      = "./module/parameters"
+  platform_params_path_prefix = "/test"
+  parameter_prefix            = "app"
   params = [{
     name  = "app_username"
     value = "andy"
@@ -18,7 +18,7 @@ module "app" {
       type  = "String"
     },
     {
-      name  = "api_tokent"
+      name  = "api_token"
       value = "6f5902ac237024bdd0c176cb93063dc4"
       type  = "SecureString"
     }
