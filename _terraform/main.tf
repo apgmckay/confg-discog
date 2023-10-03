@@ -1,5 +1,6 @@
 module "app" {
-  source           = "./module/parameters"
+  source = "./module/parameters"
+  //  platform_params_path_prefix = "/test"
   parameter_prefix = "app"
   params = [{
     name  = "app_username"

@@ -14,11 +14,11 @@ locals {
   param_names      = [for key, value in local.ssm_param_prefixed_objects : value.name]
   templatefilepath = var.template_output_path
 
+
+  confgd_toml_file = local.get_external_params == 1 ? templatefile("${path.module}/templates/myconfig.toml.tmpl", { param_names = local.param_names, platform_param_names = data.aws_ssm_parameters_by_path.params[0].names }) : templatefile("${path.module}/templates/myconfig.toml.tmpl", { param_names = local.param_names, platform_param_names = [] })
+
   get_external_params = length(var.platform_params_path_prefix) > 1 ? 1 : 0
 }
-
-// TODO: the conditional grabbing of data ssm_params_by_path creates the following problems that need to be fixed
-// -  everything has to be referenced by index. This is an issue for the empty case 
 
 data "aws_ssm_parameters_by_path" "params" {
   count = local.get_external_params
@@ -34,16 +34,6 @@ resource "aws_ssm_parameter" "params" {
 
 resource "local_file" "confg_discog_template_toml" {
   count    = var.template_render == true ? 1 : 0
-  content  = templatefile("${path.module}/templates/myconfig.toml.tmpl", { param_names = local.param_names, platform_param_names = data.aws_ssm_parameters_by_path.params[0].names })
+  content  = local.confgd_toml_file
   filename = format("%s/%s", local.templatefilepath, "myconfig.toml")
-}
-
-output "template_filepath" {
-  description = "Template file rendered to filesystem at value."
-  value       = local.templatefilepath
-}
-
-output "template_file_contents" {
-  description = "Template file contents."
-  value       = templatefile("${path.module}/templates/myconfig.toml.tmpl", { param_names = local.param_names, platform_param_names = data.aws_ssm_parameters_by_path.params[0].names })
 }
