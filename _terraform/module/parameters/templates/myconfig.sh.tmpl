@@ -1,11 +1,12 @@
 #/bin/sh
-echo "platform load envs"
-%{ for platform_param_name_bash_env_var in platform_param_name_bash_env_vars ~}
-%{ for platform_param_name in platform_param_names ~}
-export ${platform_param_name_bash_env_var}=$${{getv ${platform_param_name}}}
+echo "LOAD PLATFORM ENVS"
+echo
+%{ for v in platform_param_names ~}
+${v}
 %{ endfor ~}
-%{ endfor ~}
-echo "app load envs"
-%{ for param_name in param_names ~}
-export  ${param_name}
+
+echo "LOAD APP ENVS"
+echo
+%{ for v in app_param_names ~}
+${v}
 %{ endfor ~}
