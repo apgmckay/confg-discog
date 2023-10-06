@@ -17,27 +17,6 @@ variable "params" {
     type  = string
   }))
   description = "Names values and types of the parameter that are going to be created/updated."
-  default = [{
-    name  = "app_username"
-    value = "andy"
-    type  = "String"
-    },
-    {
-      name  = "app_password"
-      value = "mysafepassword"
-      type  = "SecureString"
-    },
-    {
-      name  = "app_url"
-      value = "myapiurl.co.uk"
-      type  = "String"
-    },
-    {
-      name  = "api_tokent"
-      value = "6f5902ac237024bdd0c176cb93063dc4"
-      type  = "SecureString"
-    }
-  ]
 }
 
 variable "template_render" {
@@ -58,4 +37,16 @@ variable "confg_discog_config_file" {
 variable "confg_discog_app_config_file" {
   type        = string
   description = "Confd bash confg file for apps."
+}
+
+variable "tf_confd_toml_template_file" {
+  type        = string
+  description = "Confd toml template file name this can be a relative path from the calling tf module."
+  default     = "templates/myconfig.toml.tmpl"
+}
+
+variable "tf_confd_sh_template_file" {
+  type        = string
+  description = "Confd sh template file name, this can be a relative path from the calling tf module."
+  default     = "templates/myconfig.sh.tmpl"
 }

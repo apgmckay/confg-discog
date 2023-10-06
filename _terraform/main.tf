@@ -27,4 +27,7 @@ module "app" {
   template_output_path         = var.confgd_toml_filepath
   confg_discog_config_file     = var.confg_discog_config_file
   confg_discog_app_config_file = var.confg_discog_app_config_file
+
+  tf_confd_toml_template_file = var.tf_confd_toml_template_file
+  tf_confd_sh_template_file   = var.tf_confd_sh_template_file
 }

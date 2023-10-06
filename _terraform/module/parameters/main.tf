@@ -21,14 +21,15 @@ locals {
   input_app_param_names = [for key, value in local.ssm_param_prefixed_objects : value.name]
   app_param_names       = [for key, value in local.input_app_param_names : format("export %s={{getv(%s)}}", upper(split(format("%s/", local.prefix), value)[1]), value)]
 
-  cgd_config_toml_file = local.get_platform_params == 1 ? templatefile("${path.module}/templates/myconfig.toml.tmpl", {
+  cgd_config_toml_file = local.get_platform_params == 1 ? templatefile(format("${path.module}/%s", var.tf_confd_toml_template_file), {
     app_param_names      = local.input_app_param_names,
     platform_param_names = data.aws_ssm_parameters_by_path.params[0].names
-    }) : templatefile("${path.module}/templates/myconfig.toml.tmpl", {
+    }) : templatefile(format("${path.module}/%s", var.tf_confd_toml_template_file), {
     app_param_names      = local.input_app_param_names,
     platform_param_names = []
   })
-  cgd_bash_runtime_file = templatefile("${path.module}/templates/myconfig.sh.tmpl", { platform_param_names = local.platform_param_names, app_param_names = local.app_param_names })
+
+  cgd_bash_runtime_file = templatefile(format("${path.module}/%s", var.tf_confd_sh_template_file), { platform_param_names = local.platform_param_names, app_param_names = local.app_param_names })
 }
 
 data "aws_ssm_parameters_by_path" "params" {
