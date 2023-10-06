@@ -1,0 +1,12 @@
+#/bin/sh
+echo "LOAD PLATFORM ENVS"
+echo
+%{ for v in platform_param_names ~}
+${v}
+%{ endfor ~}
+
+echo "LOAD APP ENVS"
+echo
+%{ for v in app_param_names ~}
+${v}
+%{ endfor ~}

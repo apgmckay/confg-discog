@@ -1,0 +1,11 @@
+[template]
+src = "${confd_src_file}"
+dest = "${confd_dest_file}"
+keys = [
+%{ for v in platform_param_names ~}
+ "${v}",
+%{ endfor ~}
+%{ for v in app_param_names ~}
+ "${v}",
+%{ endfor ~}
+]
