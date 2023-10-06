@@ -1,6 +1,7 @@
 package confg_discog
 
 import (
+	"errors"
 	"os"
 	"os/exec"
 	"time"
@@ -14,6 +15,10 @@ type ConfgDiscog struct {
 	configFile string
 }
 
+var UnsupportedBackendErr = errors.New("ERROR: Unspported backend.")
+var UnspportedLogLevel = errors.New("ERROR: Unspported log level.")
+var ConfigFileNotExistsErr = errors.New("ERROR: Config file not exists.")
+
 func New(runInterval int) ConfgDiscog {
 	logPrefix := "confg_discog:"
 	return ConfgDiscog{
@@ -26,16 +31,49 @@ func (cd *ConfgDiscog) SetInterval(runInterval int) {
 	cd.interval = runInterval
 }
 
-func (cd *ConfgDiscog) SetBackend(backend string) {
-	cd.backend = backend
+func (cd *ConfgDiscog) SetBackend(backend string) error {
+	var err error
+	switch backend {
+	case "ssm":
+		cd.backend = backend
+	default:
+		cd.backend = ""
+		err = UnsupportedBackendErr
+	}
+	return err
 }
 
-func (cd *ConfgDiscog) SetLogLevel(logLevel string) {
-	cd.logLevel = logLevel
+func (cd *ConfgDiscog) SetLogLevel(logLevel string) error {
+	var err error
+	switch logLevel {
+	case "panic":
+		cd.logLevel = logLevel
+	case "fatal":
+		cd.logLevel = logLevel
+	case "error":
+		cd.logLevel = logLevel
+	case "warn":
+		cd.logLevel = logLevel
+	case "info":
+		cd.logLevel = logLevel
+	case "debug":
+		cd.logLevel = logLevel
+	default:
+		cd.logLevel = ""
+		err = UnspportedLogLevel
+	}
+	return err
 }
 
-func (cd *ConfgDiscog) SetConfigFile(configFileName string) {
-	cd.configFile = configFileName
+func (cd *ConfgDiscog) SetConfigFile(configFileName string) error {
+	var err error
+	if _, err := os.Stat(configFileName); err == nil {
+		cd.configFile = configFileName
+	} else {
+		cd.configFile = ""
+		err = ConfigFileNotExistsErr
+	}
+	return err
 }
 
 func (cd *ConfgDiscog) Run() {
