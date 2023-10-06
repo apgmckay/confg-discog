@@ -49,3 +49,13 @@ variable "template_output_path" {
   type        = string
   description = "Path of where to render confgd toml template."
 }
+
+variable "confg_discog_config_file" {
+  type        = string
+  description = "Confd toml config file name."
+}
+
+variable "confg_discog_app_config_file" {
+  type        = string
+  description = "Confd bash confg file for apps."
+}

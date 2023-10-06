@@ -23,6 +23,8 @@ module "app" {
       type  = "SecureString"
     }
   ]
-  template_render      = var.template_render
-  template_output_path = var.confgd_toml_filepath
+  template_render              = var.template_render
+  template_output_path         = var.confgd_toml_filepath
+  confg_discog_config_file     = var.confg_discog_config_file
+  confg_discog_app_config_file = var.confg_discog_app_config_file
 }

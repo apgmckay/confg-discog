@@ -46,11 +46,11 @@ resource "aws_ssm_parameter" "params" {
 resource "local_file" "confg_discog_template_toml" {
   count    = var.template_render == true ? 1 : 0
   content  = local.cgd_config_toml_file
-  filename = format("%s/%s", local.templatefilepath, "myconfig.toml")
+  filename = format("%s/%s", local.templatefilepath, var.confg_discog_config_file)
 }
 
 resource "local_file" "confg_discog_template_bash" {
   count    = var.template_render == true ? 1 : 0
   content  = local.cgd_bash_runtime_file
-  filename = format("%s/%s", local.templatefilepath, "myconfig.sh")
+  filename = format("%s/%s", local.templatefilepath, var.confg_discog_app_config_file)
 }
