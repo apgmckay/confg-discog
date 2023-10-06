@@ -14,10 +14,10 @@ locals {
 
   get_platform_params      = length(var.platform_params_path_prefix) > 1 ? 1 : 0
   ssm_platform_param_names = [for v in data.aws_ssm_parameters_by_path.params[0].names : v]
-  platform_param_names     = [for v in local.ssm_platform_param_names : format("export %s={{getv(%s)}}", upper(split(var.platform_params_path_prefix, v)[1]), v)]
+  platform_param_names     = [for v in local.ssm_platform_param_names : format("export %s={{getv \"%s\"}}", upper(split(var.platform_params_path_prefix, v)[1]), v)]
 
   input_app_param_names = [for key, value in local.ssm_param_prefixed_objects : value.name]
-  app_param_names       = [for key, value in local.input_app_param_names : format("export %s={{getv(%s)}}", upper(split(format("%s/", local.prefix), value)[1]), value)]
+  app_param_names       = [for key, value in local.input_app_param_names : format("export %s={{getv \"%s\"}}", upper(split(format("%s/", local.prefix), value)[1]), value)]
 
   cgd_config_toml_file = local.get_platform_params == 1 ? templatefile(format("%s", var.tf_confd_toml_template_file), {
     app_param_names      = local.input_app_param_names,

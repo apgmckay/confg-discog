@@ -1,11 +1,11 @@
 [template]
-src = ${confd_src_file}
-dest = ${confd_dest_file}
+src = "${confd_src_file}"
+dest = "${confd_dest_file}"
 keys = [
 %{ for v in platform_param_names ~}
- ${v}
+ "${v}",
 %{ endfor ~}
 %{ for v in app_param_names ~}
- ${v}
+ "${v}",
 %{ endfor ~}
 ]
