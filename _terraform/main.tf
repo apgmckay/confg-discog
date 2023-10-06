@@ -1,6 +1,6 @@
 module "app" {
   source                      = "./module/parameters"
-  platform_params_path_prefix = "/test"
+  platform_params_path_prefix = "/test/"
   parameter_prefix            = "app"
   params = [{
     name  = "app_username"
@@ -30,4 +30,7 @@ module "app" {
 
   tf_confd_toml_template_file = var.tf_confd_toml_template_file
   tf_confd_sh_template_file   = var.tf_confd_sh_template_file
+
+  confd_src_file  = "myconfig.sh.tmpl"
+  confd_dest_file = "/tmp/myconfig.sh"
 }

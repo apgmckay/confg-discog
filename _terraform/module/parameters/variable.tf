@@ -50,3 +50,11 @@ variable "tf_confd_sh_template_file" {
   description = "Confd sh template file name, this can be a relative path from the calling tf module."
   default     = "templates/myconfig.sh.tmpl"
 }
+
+variable "confd_src_file" {
+  type = string
+}
+
+variable "confd_dest_file" {
+  type = string
+}

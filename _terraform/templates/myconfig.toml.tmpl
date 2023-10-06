@@ -1,6 +1,6 @@
 [template]
-src = "myconfig.sh.tmpl"
-dest = "/tmp/myconfig.sh"
+src = ${confd_src_file}
+dest = ${confd_dest_file}
 keys = [
 %{ for v in platform_param_names ~}
  ${v}
