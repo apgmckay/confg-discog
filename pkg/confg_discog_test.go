@@ -77,23 +77,29 @@ func TestSetBackend(t *testing.T) {
 
 func TestLogLevel(t *testing.T) {
 	tests := []struct {
-		input    string
-		expected string
+		input         string
+		expected      string
+		expectedError error
 	}{
-		{"debug", "debug"},
-		{"info", "info"},
-		{"warn", "warn"},
-		{"error", "error"},
-		{"fatal", "fatal"},
-		{"panic", "panic"},
-		{"badInput", ""},
+		{"debug", "debug", nil},
+		{"info", "info", nil},
+		{"warn", "warn", nil},
+		{"error", "error", nil},
+		{"fatal", "fatal", nil},
+		{"panic", "panic", nil},
+		{"badInput", "", UnspportedLogLevel},
 	}
 	cd := New(1)
 	for _, v := range tests {
-		cd.SetLogLevel(v.input)
+		gotErr := cd.SetLogLevel(v.input)
 		got := cd.logLevel
 		if got != v.expected {
 			t.Logf("expected: %s got: %s", v.expected, got)
+			t.Fail()
+		}
+
+		if gotErr != v.expectedError {
+			t.Logf("expected: %s got: %s", v.expectedError, gotErr)
 			t.Fail()
 		}
 	}
