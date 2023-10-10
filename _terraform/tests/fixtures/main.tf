@@ -1,4 +1,3 @@
-# TODO: this should be moved into tests
 module "app" {
   source = "../../"
 
@@ -27,12 +26,13 @@ module "app" {
     }
   ]
 
-  # TODO: this will need delting
-  template_render = false
-
-  confg_discog_template_output_path = "../../confd/conf.d/"
+  # TODO: only used to render file 
+  template_render                   = false
   confg_discog_config_file          = "myconfig.toml"
+  confg_discog_template_output_path = "../../confd/conf.d/"
   confg_discog_app_config_file      = "myconfig.sh"
   confg_discog_src_file             = "myconfig.sh.tmpl"
   confg_discog_dest_file            = "/tmp/myconfig.sh"
+
+
 }
