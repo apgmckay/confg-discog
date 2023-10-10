@@ -19,17 +19,17 @@ variable "params" {
   description = "Names values and types of the parameter that are going to be created/updated."
 }
 
-variable "template_render" {
+variable "tf_template_render" {
   type        = bool
   description = "Render confgd toml config file?"
 }
 
-variable "confg_discog_template_output_path" {
+variable "tf_confg_discog_template_output_path" {
   type        = string
   description = "Path of where to render confgd toml template."
 }
 
-variable "confg_discog_config_file" {
+variable "tf_confg_discog_config_file" {
   type        = string
   description = "Confd toml config file name."
 }
