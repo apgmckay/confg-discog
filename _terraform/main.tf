@@ -1,5 +1,8 @@
+# TODO: this should be moved into tests
 module "app" {
-  source                      = "./module/parameters"
+  source = "./module/parameters"
+
+  # TODO: this should be a list
   platform_params_path_prefix = "/test/"
   parameter_prefix            = "app"
   params = [{
@@ -23,14 +26,13 @@ module "app" {
       type  = "SecureString"
     }
   ]
-  template_render              = var.template_render
-  template_output_path         = var.confgd_toml_filepath
-  confg_discog_config_file     = var.confg_discog_config_file
-  confg_discog_app_config_file = var.confg_discog_app_config_file
 
-  tf_confd_toml_template_file = var.tf_confd_toml_template_file
-  tf_confd_sh_template_file   = var.tf_confd_sh_template_file
+  # TODO: this will need delting
+  template_render = var.template_render
 
-  confd_src_file  = "myconfig.sh.tmpl"
-  confd_dest_file = "/tmp/myconfig.sh"
+  confg_discog_template_output_path = "../confd/conf.d/"
+  confg_discog_config_file          = "myconfig.toml"
+  confg_discog_app_config_file      = "myconfig.sh"
+  confg_discog_src_file             = "myconfig.sh.tmpl"
+  confg_discog_dest_file            = "/tmp/myconfig.sh"
 }
