@@ -30,7 +30,23 @@ Go through the instructions in Development.
 
 ## Development
 
-To build:
+### Testing
+
+*Unit* tests can be ran for the golang package like so.
+
+```
+$ cd pkg/ $ go test ./...
+$ go test ./...
+```
+
+*Terraform* tests can be ran for the terraform module.
+
+```
+$ cd _terraform/tests/
+$ go test 
+```
+
+You can set skipTeardown in the terraform tests to true, then perform end to end testing by setting up the following function in your shell alias and reloading.
 
 ```
 function confg_discog_build_and_run {
@@ -38,98 +54,80 @@ function confg_discog_build_and_run {
   docker build . -t confg_discog
   docker run -e AWS_REGION=${AWS_REGION} -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} -it confg_discog 
 }
+```
+Then running. 
+ 
+```
 $ confg_discog_build_and_run 
 ```
 
 You should recieve an output something like the below, if you change your ssm parameter between the second sleep in [cmd.sh](cmd.sh); the value set to someconfig_url and someconfig_user will be those stored in ssm parameter store.
 
 ```
-Sending build context to Docker daemon  370.4MB
-
+Sending build context to Docker daemon   1.13GB
 Step 1/8 : FROM dockage/confd:latest
  ---> 729bfb969995
 Step 2/8 : COPY confg_discog /usr/bin/confg-discog
  ---> Using cache
- ---> 03871afa8d0c
-Step 3/8 : COPY confd/conf.d/myconfig.toml /etc/confd/conf.d/myconfig.toml
+ ---> db49897fdd90
+Step 3/8 : COPY _terraform/tests/fixtures/default/confd/conf.d/myconfig.toml /etc/confd/conf.d/myconfig.toml
  ---> Using cache
- ---> 4910bbfd6f74
-Step 4/8 : COPY confd/conf.d/myconfig.conf.tmpl /etc/confd/templates/myconfig.conf.tmpl
+ ---> 413c62bc3721
+Step 4/8 : COPY _terraform/tests/fixtures/default/confd/conf.d/myconfig.sh /etc/confd/templates/myconfig.sh.tmpl
  ---> Using cache
- ---> 06dfad23f7b4
+ ---> c90898ad4310
 Step 5/8 : COPY entrypoint.sh /usr/bin/entrypoint
  ---> Using cache
- ---> 29ffb1f061da
+ ---> a85e8047c5d8
 Step 6/8 : COPY cmd.sh /usr/bin/cmd
  ---> Using cache
- ---> f373354e10d3
+ ---> 4a342f278f43
 Step 7/8 : ENTRYPOINT ["/usr/bin/entrypoint"]
  ---> Using cache
- ---> 2d85c44b20b1
+ ---> 254664d9fcf5
 Step 8/8 : CMD ["/usr/bin/cmd"]
  ---> Using cache
- ---> 555229ddacf6
-Successfully built 555229ddacf6
+ ---> a77b088d5100
+Successfully built a77b088d5100
 Successfully tagged confg_discog:latest
 entrypoint: starting
 entrypoint: config-discog started
 cmd: Hello!
 cmd: sleeping for 5
-2023/06/03 17:05:23 entrypoint: Hello!
-2023/06/03 17:05:23 entrypoint: new ConfgDiscog!
-2023/06/03 17:05:23 entrypoint: set backend == ssm
-2023/06/03 17:05:23 entrypoint: ConfgDiscog Running!
-2023/06/03 17:05:23 entrypoint: loglevel set to info
-2023/06/03 17:05:25 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-03T17:05:25Z 3769e7cfc73e confd[14]: INFO Backend set to ssm
-2023-06-03T17:05:25Z 3769e7cfc73e confd[14]: INFO Starting confd
-2023-06-03T17:05:25Z 3769e7cfc73e confd[14]: INFO Backend source(s) set to 
-2023-06-03T17:05:26Z 3769e7cfc73e confd[14]: INFO Target config /tmp/myconfig.conf out of sync
-2023-06-03T17:05:26Z 3769e7cfc73e confd[14]: INFO Target config /tmp/myconfig.conf has been updated
-2023/06/03 17:05:27 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-03T17:05:27Z 3769e7cfc73e confd[28]: INFO Backend set to ssm
-2023-06-03T17:05:27Z 3769e7cfc73e confd[28]: INFO Starting confd
-2023-06-03T17:05:27Z 3769e7cfc73e confd[28]: INFO Backend source(s) set to 
-cmd: source myconfig.conf
-cmd: someconfig_url: example.com
-cmd: someconfig_user: andy
-cmd: someconfig_password: {password:supersecret,username:admin,admin_password:somepassword}
+2023-10-11T17:34:21Z 5588d7ab011c confd[14]: INFO Backend set to ssm
+2023-10-11T17:34:21Z 5588d7ab011c confd[14]: INFO Starting confd
+2023-10-11T17:34:21Z 5588d7ab011c confd[14]: INFO Backend source(s) set to 
+2023-10-11T17:34:22Z 5588d7ab011c confd[14]: INFO Target config /tmp/myconfig.sh out of sync
+2023-10-11T17:34:22Z 5588d7ab011c confd[14]: INFO Target config /tmp/myconfig.sh has been updated
+2023-10-11T17:34:23Z 5588d7ab011c confd[30]: INFO Backend set to ssm
+2023-10-11T17:34:23Z 5588d7ab011c confd[30]: INFO Starting confd
+2023-10-11T17:34:23Z 5588d7ab011c confd[30]: INFO Backend source(s) set to 
+cmd: source myconfig.sh
+LOAD EXTERNAL ENVS
+
+LOAD APP ENVS
+
+
+CONFG_DISCOG SERVICE PARAMS!!!
+
+CONFG_DISCOG_SERVICE_SIDECAR_SERVICE=https://somesidecarurl.simplebusiness.me
+
+CONFG_DISCOG PLATFORM PARAMS!!!
+
+CONFG_DISCOG_PLATFORM_NEW_RELIC_DASHBOARD=http://newrelic.eu_west_1.com
+CONFG_DISCOG_PLATFORM_DA_CONNECTION_STRING=mongo://somenonrealconnectionstring.eu_west_1.com
+CONFG_DISCOG_PLATFORM_APP_USERNAME=andy
+CONFG_DISCOG_PLATFORM_OTEL_COLLECTOR_ENDPOINT=otel://otelsubdomain.eu_west_1.com
+
+CONFG_DISCOG APP PARAMS!!!
+
+CONFG_DISCOG_APP_APP_USERNAME=andy
+CONFG_DISCOG_APP_API_TOKEN=6f5902ac237024bdd0c176cb93063dc4
+CONFG_DISCOG_APP_APP_PASSWORD=mysafepassword
+CONFG_DISCOG_APP_APP_URL=myapiurl.co.uk
+
+
 cmd: sleeping for 15
-2023/06/03 17:05:29 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-03T17:05:29Z 3769e7cfc73e confd[43]: INFO Backend set to ssm
-2023-06-03T17:05:29Z 3769e7cfc73e confd[43]: INFO Starting confd
-2023-06-03T17:05:29Z 3769e7cfc73e confd[43]: INFO Backend source(s) set to 
-2023/06/03 17:05:31 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-03T17:05:31Z 3769e7cfc73e confd[57]: INFO Backend set to ssm
-2023-06-03T17:05:31Z 3769e7cfc73e confd[57]: INFO Starting confd
-2023-06-03T17:05:31Z 3769e7cfc73e confd[57]: INFO Backend source(s) set to 
-2023/06/03 17:05:33 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-03T17:05:33Z 3769e7cfc73e confd[70]: INFO Backend set to ssm
-2023-06-03T17:05:33Z 3769e7cfc73e confd[70]: INFO Starting confd
-2023-06-03T17:05:33Z 3769e7cfc73e confd[70]: INFO Backend source(s) set to 
-2023/06/03 17:05:35 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-03T17:05:35Z 3769e7cfc73e confd[84]: INFO Backend set to ssm
-2023-06-03T17:05:35Z 3769e7cfc73e confd[84]: INFO Starting confd
-2023-06-03T17:05:35Z 3769e7cfc73e confd[84]: INFO Backend source(s) set to 
-2023/06/03 17:05:37 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-03T17:05:37Z 3769e7cfc73e confd[97]: INFO Backend set to ssm
-2023-06-03T17:05:37Z 3769e7cfc73e confd[97]: INFO Starting confd
-2023-06-03T17:05:37Z 3769e7cfc73e confd[97]: INFO Backend source(s) set to 
-2023/06/03 17:05:39 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-03T17:05:39Z 3769e7cfc73e confd[111]: INFO Backend set to ssm
-2023-06-03T17:05:39Z 3769e7cfc73e confd[111]: INFO Starting confd
-2023-06-03T17:05:39Z 3769e7cfc73e confd[111]: INFO Backend source(s) set to 
-2023/06/03 17:05:41 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-2023-06-03T17:05:41Z 3769e7cfc73e confd[125]: INFO Backend set to ssm
-2023-06-03T17:05:41Z 3769e7cfc73e confd[125]: INFO Starting confd
-2023-06-03T17:05:41Z 3769e7cfc73e confd[125]: INFO Backend source(s) set to 
-2023/06/03 17:05:43 entrypoint: starting command: [confd -onetime -backend ssm -log-level ]
-cmd: source myconfig.conf
-cmd: someconfig_url: example.com
-cmd: someconfig_user: andy
-cmd: someconfig_password: {password:supersecret,username:admin,admin_password:somepassword}
-cmd: bye
-entrypoint: after eval
 ```
 
 This is basically just a wraper around [confd](https://github.com/kelseyhightower/confd) with some shell redirection to hang this on an entrypoint of a docker container. This allows for config and secrets to be loaded synamically inside of a container from any backend supported by confd.

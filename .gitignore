@@ -7,4 +7,4 @@
 confg_discog
 confg-discog
 
-confd/**
+_terraform/tests/fixtures/default/confd/**
