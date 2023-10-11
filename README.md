@@ -151,4 +151,3 @@ Load average: 0.38 0.24 0.26 2/1709 137
 - Figure out how we can debug this when running in a docker container on a orchestrator ECS or K8. This will involve where to send logs or prehaps having an SNS topic that can tell us when we are getting errors from the runs of confd.
 - Generally a bit of thought needs to go into secrets for the following points:
   - Figure out a sensible way of injecting secrets manager version.
-  - How are platform secrets passed.
