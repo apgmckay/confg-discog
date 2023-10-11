@@ -12,15 +12,19 @@ locals {
     }
   ]
 
+  formater_string = "export %s={{getv \"%s\"}}" # TODO: it could be interesting to expose this as a var, that might solve the problem of different config types
+
   ssm_external_param_names_path      = [for v in var.external_params_path_prefix : format("/%s/%s", local.default_prefix, v)]
   ssm_external_param_names_all       = [for v in data.aws_ssm_parameters_by_path.params : v.names]
   ssm_external_param_names_flattened = flatten(local.ssm_external_param_names_all)
 
   ssm_external_param_names_upper = [for v in local.ssm_external_param_names_flattened : trim(replace(upper(v), "/", "_"), "_")]
-  ssm_external_param_names_bash  = [for i, v in local.ssm_external_param_names_flattened : format("export %s={{getv \"%s\"}}", local.ssm_external_param_names_upper[i], v)]
+  ssm_external_param_names_bash  = [for i, v in local.ssm_external_param_names_flattened : format(local.bash_formater_string, local.ssm_external_param_names_upper[i], v)]
 
-  input_app_param_names      = [for key, value in local.ssm_param_prefixed_objects : value.name]
-  input_app_param_names_bash = [for key, value in local.input_app_param_names : format("export %s={{getv \"%s\"}}", trim(replace(upper(value), "/", "_"), "_"), value)]
+  input_app_param_names = [for key, value in local.ssm_param_prefixed_objects : value.name]
+
+  bash_formater_string       = "export %s={{getv \"%s\"}}"
+  input_app_param_names_bash = [for key, value in local.input_app_param_names : format(local.bash_formater_string, trim(replace(upper(value), "/", "_"), "_"), value)]
 
   tf_confd_toml_template_file = "${path.module}/templates/myconfig.toml.tmpl"
   tf_confd_sh_template_file   = "${path.module}/templates/myconfig.sh.tmpl"

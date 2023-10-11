@@ -8,13 +8,7 @@ import (
 )
 
 func TestNew(t *testing.T) {
-	expected := 1
-	cd := New(expected)
-
-	if cd.interval != expected {
-		t.Logf("expected: %d got: %d", expected, cd.interval)
-		t.Fail()
-	}
+	cd := New()
 
 	expectedType := "confg_discog.ConfgDiscog"
 	got := fmt.Sprintf("%s", reflect.TypeOf(cd))
@@ -31,7 +25,7 @@ func TestSetInterval(t *testing.T) {
 	}{
 		{10, 10},
 	}
-	cd := New(1)
+	cd := New()
 	for _, v := range tests {
 		cd.SetInterval(v.input)
 
@@ -59,7 +53,7 @@ func TestSetBackend(t *testing.T) {
 		{"console", "", UnsupportedBackendErr},
 		{"badInput", "", UnsupportedBackendErr},
 	}
-	cd := New(1)
+	cd := New()
 	for _, v := range tests {
 		gotErr := cd.SetBackend(v.input)
 		got := cd.backend
@@ -89,7 +83,7 @@ func TestLogLevel(t *testing.T) {
 		{"panic", "panic", nil},
 		{"badInput", "", UnspportedLogLevel},
 	}
-	cd := New(1)
+	cd := New()
 	for _, v := range tests {
 		gotErr := cd.SetLogLevel(v.input)
 		got := cd.logLevel
@@ -118,7 +112,7 @@ func TestSetConfigFile(t *testing.T) {
 		{"./no_file_2.toml", "", ConfigFileNotExistsErr},
 		{"./no_file_3.toml", "", ConfigFileNotExistsErr},
 	}
-	cd := New(1)
+	cd := New()
 
 	for _, v := range tests {
 		if v.expectedError == nil {
