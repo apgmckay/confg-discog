@@ -25,12 +25,6 @@ variable "tf_template_render" {
   default     = true
 }
 
-variable "tf_confg_discog_template_output_path" {
-  type        = string
-  description = "Path of where to render confgd toml template."
-  default     = ""
-}
-
 variable "confg_discog_config_file" {
   type        = string
   description = "Confd toml config file name."
