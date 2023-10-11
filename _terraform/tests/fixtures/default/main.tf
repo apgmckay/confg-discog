@@ -1,6 +1,6 @@
 module "app" {
   source                      = "../../../"
-  external_params_path_prefix = ["platform", "service"]
+  external_params_path_prefix = var.external_params_path_prefix
 
   parameter_prefix = "app"
   params = [{

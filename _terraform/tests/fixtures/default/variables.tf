@@ -11,3 +11,7 @@ variable "confg_discog_config_file" {
 variable "confg_discog_app_config_file" {
   type = string
 }
+
+variable "external_params_path_prefix" {
+  type = list(string)
+}
