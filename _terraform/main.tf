@@ -16,13 +16,11 @@ locals {
   ssm_external_param_names_all       = [for v in data.aws_ssm_parameters_by_path.params : v.names]
   ssm_external_param_names_flattened = flatten(local.ssm_external_param_names_all)
 
-  # NOTE: this will always make the assumption that the parameter is stored in a namespace 3 deep for example `/config_discog/app/param_name` 
-  #       `param_name` will always be used as a config here.
-  ssm_external_param_names_upper = [for v in local.ssm_external_param_names_flattened : upper(split("/", v)[3])]
+  ssm_external_param_names_upper = [for v in local.ssm_external_param_names_flattened : trim(replace(upper(v), "/", "_"), "_")]
   ssm_external_param_names_bash  = [for i, v in local.ssm_external_param_names_flattened : format("export %s={{getv \"%s\"}}", local.ssm_external_param_names_upper[i], v)]
 
-  input_app_param_names = [for key, value in local.ssm_param_prefixed_objects : value.name]
-  app_param_names_bash  = [for key, value in local.input_app_param_names : format("export %s={{getv \"%s\"}}", upper(split(format("%s/", local.prefix), value)[1]), value)]
+  input_app_param_names      = [for key, value in local.ssm_param_prefixed_objects : value.name]
+  input_app_param_names_bash = [for key, value in local.input_app_param_names : format("export %s={{getv \"%s\"}}", trim(replace(upper(value), "/", "_"), "_"), value)]
 
   tf_confd_toml_template_file = "${path.module}/templates/myconfig.toml.tmpl"
   tf_confd_sh_template_file   = "${path.module}/templates/myconfig.sh.tmpl"
@@ -34,7 +32,7 @@ locals {
     confd_dest_file      = var.confg_discog_dest_file
   })
 
-  cgd_bash_runtime_file = templatefile(format("%s", local.tf_confd_sh_template_file), { external_param_names = local.ssm_external_param_names_bash, app_param_names = local.app_param_names_bash })
+  cgd_bash_runtime_file = templatefile(format("%s", local.tf_confd_sh_template_file), { external_param_names = local.ssm_external_param_names_bash, app_param_names = local.input_app_param_names_bash })
 }
 
 data "aws_ssm_parameters_by_path" "params" {
