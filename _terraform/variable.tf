@@ -1,7 +1,7 @@
-variable "platform_params_path_prefix" {
-  type        = string
+variable "external_params_path_prefix" {
+  type        = list(string)
   description = "Prefix path that will be used to gather pre existing parameters."
-  default     = ""
+  default     = []
 }
 
 variable "parameter_prefix" {
@@ -22,27 +22,35 @@ variable "params" {
 variable "tf_template_render" {
   type        = bool
   description = "Render confgd toml config file?"
+  default     = true
 }
 
 variable "tf_confg_discog_template_output_path" {
   type        = string
   description = "Path of where to render confgd toml template."
+  default     = ""
 }
 
-variable "tf_confg_discog_config_file" {
+variable "confg_discog_config_file" {
   type        = string
   description = "Confd toml config file name."
+  default     = ""
 }
 
 variable "confg_discog_app_config_file" {
   type        = string
   description = "Confd bash confg file for apps."
+  default     = ""
 }
 
 variable "confg_discog_src_file" {
-  type = string
+  type        = string
+  default     = ""
+  description = ""
 }
 
 variable "confg_discog_dest_file" {
-  type = string
+  type        = string
+  default     = ""
+  description = ""
 }
