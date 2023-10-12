@@ -14,8 +14,9 @@ var confdConfigFile = "/etc/confd/conf.d/myconfig.toml"
 func main() {
 	var err error
 
-	cd := confg_discog.New(interval)
+	cd := confg_discog.New()
 
+	cd.SetInterval(interval)
 	err = cd.SetConfigFile(confdConfigFile)
 	handleErrorExit(err, 1)
 	err = cd.SetBackend(confdBackend)

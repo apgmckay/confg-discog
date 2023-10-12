@@ -1,18 +1,19 @@
 #!/bin/sh
-
 function print_ssm_values {
-  echo
-  echo "cmd: APP PARAMS!!!"
-  echo
-  echo "cmd: app_username: ${APP_USERNAME}"
-  echo "cmd: app_password: ${APP_PASSWORD}"
-  echo "cmd: app_url: ${APP_URL}"
-  echo "cmd: api_token: ${API_TOKEN}"
-  echo
-  echo "cmd: PLATFORM PARAMS!!!"
   echo 
-  echo "cmd: apgmckay: ${APGMCKAY}"  
-  echo "cmd: apgmckay2: ${APGMCKAY2}"
+  echo "CONFG_DISCOG SERVICE PARAMS!!!"
+  echo
+  env | grep CONFG_DISCOG_SERVICE
+  echo
+  echo "CONFG_DISCOG PLATFORM PARAMS!!!"
+  echo
+  env | grep CONFG_DISCOG_PLATFORM
+  echo
+  echo "CONFG_DISCOG APP PARAMS!!!"
+  echo
+  env | grep CONFG_DISCOG_APP
+  echo
+  echo
 }
 
 echo "cmd: Hello!"

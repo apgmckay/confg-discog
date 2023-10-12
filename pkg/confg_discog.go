@@ -19,10 +19,9 @@ var UnsupportedBackendErr = errors.New("ERROR: Unspported backend.")
 var UnspportedLogLevel = errors.New("ERROR: Unspported log level.")
 var ConfigFileNotExistsErr = errors.New("ERROR: Config file not exists.")
 
-func New(runInterval int) ConfgDiscog {
+func New() ConfgDiscog {
 	logPrefix := "confg_discog:"
 	return ConfgDiscog{
-		interval:  runInterval,
 		logPrefix: logPrefix,
 	}
 }
@@ -86,10 +85,7 @@ func (cd *ConfgDiscog) Run() {
 }
 
 func (cd *ConfgDiscog) RunConfdOnetime() error {
-	var configFileArg []string
-	if len(cd.configFile) > 0 {
-		configFileArg = []string{"-config-file", cd.configFile}
-	}
+	configFileArg := []string{"-config-file", cd.configFile}
 	confidCommand := []string{"confd", "-onetime", "-backend", cd.backend, "-log-level", cd.logLevel}
 
 	confidCommand = append(confidCommand, configFileArg...)
